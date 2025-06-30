@@ -92,7 +92,11 @@ fig = go.Figure(go.Indicator(
         ]
     }
 ))
-fig.update_layout(height=350, margin=dict(l=0, r=0, t=60, b=0))
+fig.update_layout(
+    height=380, 
+    margin=dict(l=20, r=20, t=60, b=20),
+    font=dict(size=14)
+)
 st.plotly_chart(fig, use_container_width=True)
 
 if probability > 0.7:
