@@ -61,34 +61,17 @@ with st.sidebar:
     else:
         price_ratio = MEANS['ratio_to_median_purchase_price']
     
-    use_repeat = st.checkbox("Previously used retailer", value=True)
-    if use_repeat:
-        repeat_retailer = st.selectbox("", ["No", "Yes"], key="repeat")
-    else:
-        repeat_retailer = "Default"
+    use_repeat = st.checkbox("Previously used retailer")
+    repeat_val = 1 if use_repeat else MEANS['repeat_retailer']
     
-    use_chip = st.checkbox("Chip card used", value=True)
-    if use_chip:
-        used_chip = st.selectbox("", ["No", "Yes"], key="chip")
-    else:
-        used_chip = "Default"
+    use_chip = st.checkbox("Chip card used")
+    chip_val = 1 if use_chip else MEANS['used_chip']
     
-    use_pin = st.checkbox("PIN entered", value=True)
-    if use_pin:
-        used_pin = st.selectbox("", ["No", "Yes"], key="pin")
-    else:
-        used_pin = "Default"
+    use_pin = st.checkbox("PIN entered")
+    pin_val = 1 if use_pin else MEANS['used_pin_number']
     
-    use_online = st.checkbox("Online transaction", value=True)
-    if use_online:
-        online_order = st.selectbox("", ["No", "Yes"], key="online")
-    else:
-        online_order = "Default"
-
-repeat_val = MEANS['repeat_retailer'] if repeat_retailer == "Default" else (1 if repeat_retailer == "Yes" else 0)
-chip_val = MEANS['used_chip'] if used_chip == "Default" else (1 if used_chip == "Yes" else 0)
-pin_val = MEANS['used_pin_number'] if used_pin == "Default" else (1 if used_pin == "Yes" else 0)
-online_val = MEANS['online_order'] if online_order == "Default" else (1 if online_order == "Yes" else 0)
+    use_online = st.checkbox("Online transaction")
+    online_val = 1 if use_online else MEANS['online_order']
 
 X = np.array([[distance_home, distance_last, price_ratio, repeat_val, chip_val, pin_val, online_val]])
 prediction = model.predict(X)[0]
