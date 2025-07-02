@@ -105,7 +105,8 @@ with tab1:
 
 with tab2:
     st.header("Batch Fraud Detection")
-    st.write("Upload an Excel file with transaction data to analyze multiple transactions at once.")
+    st.write("Upload an Excel file (.xlsx, .xls) or CSV file with transaction data to analyze multiple transactions at once.")
+    st.write("**For Google Sheets:** Download your sheet as CSV or Excel format, or copy the share link if publicly accessible.")
     
     st.subheader("Expected Excel Format")
     expected_format = pd.DataFrame({
@@ -128,11 +129,14 @@ with tab2:
     st.write("- `used_pin_number`: 1 if PIN entered, 0 if not")
     st.write("- `online_order`: 1 if online transaction, 0 if in-person")
     
-    uploaded_file = st.file_uploader("Choose an Excel file", type=['xlsx', 'xls'])
+    uploaded_file = st.file_uploader("Choose a file", type=['xlsx', 'xls', 'csv'])
     
     if uploaded_file is not None:
         try:
-            df = pd.read_excel(uploaded_file)
+            if uploaded_file.name.endswith('.csv'):
+                df = pd.read_csv(uploaded_file)
+            else:
+                df = pd.read_excel(uploaded_file)
             
             st.subheader("Uploaded Data Preview")
             st.dataframe(df.head(), use_container_width=True)
