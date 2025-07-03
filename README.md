@@ -14,3 +14,5 @@ Output:
 * Prediction (FRAUD / LEGITIMATE)
 * Fraud Probability
 * Risk Level (HIGH / LOW)
+
+Dataset: https://www.kaggle.com/datasets/dhanushnarayananr/credit-card-fraud
